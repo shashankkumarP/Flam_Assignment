@@ -5,7 +5,6 @@ import BottomSheet from "./component/BottomSheet";
 const bodyStyle = {
   width: "100%",
   height: "100%",
-  border: "10px solid",
   backgroundColor: "rgba(7, 0, 0, 0.18)",
 };
 
