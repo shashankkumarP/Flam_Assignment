@@ -14,14 +14,13 @@ function App() {
   
   
   
-  
   const handle_modal= (a)=>{
     setIsModalOpen(a);
   }
 
   return (
     <div style={isModalOpen ? bodyStyle : {}}>
-     <BottomSheet handle_modal={handle_modal} />
+     <BottomSheet  handle_modal={handle_modal} />
   </div>
     
   )
