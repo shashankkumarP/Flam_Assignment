@@ -8,9 +8,11 @@ const BottomSheet = ({ handle_modal }) => {
   let initialY = useRef(null);
   let delay = 0;
   let prev = 0;
+  let opening;
+  let closing;
 
   const handleSnap = (newPosition) => {
-    if (newPosition == "half-open" || newPosition == "fully-open") {
+    if (newPosition != "closed") {
       handle_modal(true);
     } else {
       handle_modal(false);
@@ -36,17 +38,26 @@ const BottomSheet = ({ handle_modal }) => {
     if (!change) return;
     if (delay == prev) return;
     if (delay >= 0 && position === "closed") {
+      handleSnap("semi-half-open");
+      
+    } else if (delay > 0 && position === "semi-half-open") {
       handleSnap("half-open");
-      return;
-    } else if (delay > 0 && position === "half-open") {
-      handleSnap("fully-open");
-      return;
+      
+    }else if(delay > 0 && position === "half-open"){
+        handleSnap("semi-fully-open");
+        
+    }else if(delay > 0 && position === "semi-fully-open"){
+        handleSnap("fully-open");
     }
-    if (delay < 0 && position == "fully-open") {
+    else if (delay < 0 && position == "fully-open") {
+      handleSnap("semi-fully-open");
+    } else if (delay < 0 && position == "semi-fully-open") {
       handleSnap("half-open");
-    } else if (delay < 0 && position == "half-open") {
-      handleSnap("closed");
-    }
+    }else if (delay < 0 && position == "half-open") {
+        handleSnap("semi-half-open");
+    }else if (delay < 0 && position == "semi-half-open") {
+        handleSnap("closed");
+      }
     setChange(() => false);
   };
 
@@ -56,13 +67,15 @@ const BottomSheet = ({ handle_modal }) => {
     }
 
     document.addEventListener("mouseup", handleMouse);
+     
 
     return () => {
       setChange(() => !change);
       document.removeEventListener("mouseup", handleMouse);
     };
   }, [handleMouseUp]);
-
+  
+  console.log(opening,closing)
   return (
     <div
       className={`bottom-sheet ${position} uparrow`}
@@ -70,12 +83,11 @@ const BottomSheet = ({ handle_modal }) => {
       onMouseMove={handleMouseMove}
     >
       &#9650;
-      <div className="content"></div>
+      <div className="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque commodi, animi consequatur facilis ullam inventore repellendus ipsa laboriosam perspiciatis, pariatur nesciunt nobis qui. Dolore laboriosam mollitia dolorum saepe dolor iure.</div>
       <div className="handle"></div>
-      <div className="controls">
-        <button onClick={() => handleSnap("closed")}>Close</button>
-        <button onClick={() => handleSnap("half-open")}>Half</button>
-        <button onClick={() => handleSnap("fully-open")}>Open</button>
+      <div className="controls"  >
+        <button style={{marginRight:"5px"}} onClick={() => handleSnap("fully-open")}>Fully open</button>
+        <button onClick={() => handleSnap("closed")}>Fully close</button>
       </div>
     </div>
   );

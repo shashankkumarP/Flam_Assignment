@@ -3,27 +3,42 @@
   bottom: 0;
   left: 0;
   width: 50%;
-  height: 10px;
+  height: 0;
   margin-left: 25%;
   box-shadow: 0 10px 18px rgba(52, 87, 220, 0.18);
   border-radius: 7px;
   overflow: hidden;
   background-color: rgb(212, 62, 62);
   transform: translateY(0%);
-  transition: transform 0.3s ease-in-out;
+  transition: transform 1s ease-in-out;
   z-index: 1000;
   color: white;
 }
 
 .bottom-sheet.closed {
-  height: 50px;
+    transition: transform 1s ease-in-out;
+  height: 51px;
 }
 
 .bottom-sheet.half-open {
+    transition: transform 1s ease-in-out;
   height: 50%;
 }
 
+
+.bottom-sheet.semi-half-open {
+    transition: transform 1s ease-in-out;
+  height: 25%;
+}
+
+
+.bottom-sheet.semi-fully-open {
+    transition: transform 1s ease-in-out;
+  height: 75%;
+}
+
 .bottom-sheet.fully-open {
+    transition: transform 1s ease-in-out;
   height: 100%;
 }
 
