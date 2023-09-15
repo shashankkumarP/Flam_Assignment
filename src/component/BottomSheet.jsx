@@ -23,20 +23,16 @@ const BottomSheet = ({ handle_modal }) => {
     setChange(() => true);
     initialY.current = e.pageY || e.touches?.[0].pageY;
     prev = e.pageY || e.touches?.[0].pageY;
-    console.log("isdragon", isDragging);
   };
 
   const handleMouseMove = (e) => {
-    console.log(e.clientY, initialY.current);
     if (isDragging) {
       delay = initialY.current - (e.pageY || e.touches?.[0].pageY);
       prev = e.pageY || e.touches?.[0].pageY;
-      console.log(delay, "mousemove");
     }
   };
 
   let handleMouseUp = (e) => {
-    console.log(delay, prev, "up", change);
     if (!change) return;
     if (delay == prev) return;
     if (delay >= 0 && position === "closed") {
